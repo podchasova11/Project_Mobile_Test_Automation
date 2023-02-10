@@ -3,10 +3,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>ProgectQAutomation</groupId>
+    <groupId>org.example</groupId>
     <artifactId>Project_Mobile_Test_Automation</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -21,6 +22,7 @@
         <maven.surefire.plugin>2.22.0</maven.surefire.plugin>
 
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.junit.platform</groupId>
@@ -37,7 +39,7 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
             <version>${junit.version}</version>
-            <scope>compile</scope>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -55,7 +57,14 @@
             <artifactId>webdrivermanager</artifactId>
             <version>${webdrivermanager.version}</version>
             <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
@@ -66,7 +75,7 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.6</version>
-            <scope>test</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -95,24 +104,26 @@
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>7.2.3</version>
+            <version>7.1.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
-            <version>6.3.5</version>
+            <version>6.1.2</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-            <version>5.8.2</version>
-        </dependency>
+
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
-            <version>8.3.0</version>
+            <version>7.5.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>3.3.0</version>
         </dependency>
 
     </dependencies>
@@ -127,7 +138,7 @@
 
                     <testFailureIgnore>false</testFailureIgnore>
                     <argLine>
-                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}"
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <systemProperties>
                         <property>
@@ -136,6 +147,48 @@
                         </property>
                     </systemProperties>
                 </configuration>
+                <dependencies>
+
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>1.8.13</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure-maven.version}</version>
+                <configuration>
+
+                    <buildDirectory>C:\Users\Mila\Project_Mobile_Test_Automation\target</buildDirectory>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>C:\Users\Mila\Project_Mobile_Test_Automation\target\allure-results</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>C:\Users\Mila\Project_Mobile_Test_Automation\src\main\resources</directory>
+                                    <includes>
+                                        <include>environment.properties</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

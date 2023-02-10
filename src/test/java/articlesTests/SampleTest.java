@@ -18,8 +18,8 @@ public class SampleTest {
     public void setUp() throws MalformedURLException {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability("platformName", "android");
-        desiredCapabilities.setCapability("appium:platformVersion", "13");
-        desiredCapabilities.setCapability("appium:deviceName", "emulator-5554");
+        desiredCapabilities.setCapability("appium:platformVersion", "12");
+        desiredCapabilities.setCapability("appium:deviceName", "Pixel_6_API_31");
         desiredCapabilities.setCapability("appium:app", "C:\\Users\\Mila\\AndroidStudioProjects\\MyApplication\\app\\src\\main\\res\\xml\\Crypto Academy by Investmate_1.0.0_Apkpure.apk");
         desiredCapabilities.setCapability("appium:automationName", "UIAutomator2");
         desiredCapabilities.setCapability("appium:ensureWebviewsHavePages", true);
@@ -34,6 +34,7 @@ public class SampleTest {
 
     @Test
     public void sampleTest() {
+
 
     }
 
